@@ -40,26 +40,26 @@ function App() {
   useEffect( () => {fetchData(newStories)}, [])
 
 
-return(
-  <div className="container">
-    <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h1>
-            Hacker News
-        </h1>
-        <nav>
-            <ul>
-                <li onClick={() => fetchData(newStories)}>New</li>
-                <li onClick={() => fetchData(jobStories)}>Jobs</li>
-                <li onClick={() => fetchData(askStories)}>Ask</li>
-                <li>Comments</li>
-                <li>Show</li>
-            </ul>
-        </nav>
-    </header>
-    <Main posts={posts}/>
-  </div>
-)
+  return(
+    <div className="container">
+      <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <h1>
+              Hacker News
+          </h1>
+          <nav>
+              <ul>
+                  <li onClick={() => fetchData(newStories)}>New</li>
+                  <li onClick={() => fetchData(jobStories)}>Jobs</li>
+                  <li onClick={() => fetchData(askStories)}>Ask</li>
+                  <li>Comments</li>
+                  <li>Show</li>
+              </ul>
+          </nav>
+      </header>
+      <Main posts={posts}/>
+    </div>
+  )
 }
 
 export default App;
