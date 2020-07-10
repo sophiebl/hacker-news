@@ -1,4 +1,4 @@
-import  React, { useState, useEffect } from "react";
+import  React, { useEffect } from "react";
 import logo from './logo.gif';
 import './App.css';
 import Main from "./components/main/main";
