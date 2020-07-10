@@ -8,9 +8,8 @@ const Main = ({posts}) => (
                 <div className="post" key={index}>
                     <h2 onClick={() => {
                     window.location = `${post.url}`;
-                    }}>{index + 1} {post.title}</h2>
+                    }}>{index + 1} - {post.title}</h2>
                     <span>by {post.by}</span>
-
                 </div>
             );
         })}
