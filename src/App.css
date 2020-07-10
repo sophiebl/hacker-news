@@ -1,26 +1,32 @@
+/* Header */
+
 header {
   padding: 10px 20px;
+  background-color: rgb(255, 102, 0);
+  color: white;
 }
 
 .App-logo {
   width: 18px;
   height: 18px;
+  border: 1px solid white;
+  border-radius: 2px;
 }
 
-.App-header {
-  background-color: rgb(255, 102, 0);
-  color: white;
+ul{
+  list-style: none;
+  height: 50px;;
+  padding-inline-start: 0;
 }
 
-.App-link {
-  color: #61dafb;
+ul li{
+  display: inline-block;
+  margin: 0 5px;
+  cursor: pointer;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Main Content */
+
+h2{
+  cursor: pointer;
 }

@@ -1,19 +1,79 @@
 import  React, { useState, useEffect } from "react";
-import axios from "axios";
-// import Header from "./components/header/header.js";
-// import Main from "./components/main/main.js";
 import logo from './logo.gif';
 import './App.css';
+import Main from "./components/main/main";
 
 function App() {
 
-const [posts, setPosts] = useState(null);
+  const [posts, setPosts] = React.useState([]);
 
-const fetchDataNews = async () => {
-  const response = await axios.get(
-    'https://hacker-news.firebaseio.com/v0/topstories.json');
-    setPosts(response.data);
-  };
+   const getNew = async() => {
+      const url = "https://hacker-news.firebaseio.com/v0/topstories.json";
+      try {
+        const response = await fetch(url);
+        if (response.ok === false) {
+          throw new Error("Response Error:" + response.text);
+        }
+        const json = await response.json();
+        const promises = json
+          .slice(0, 10)
+          .map(id =>
+            fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json`).then(
+              response => response.json()
+            )
+          );
+        const result = await Promise.all(promises);
+        setPosts(result);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    const getJobs = async() => {
+      const url = "https://hacker-news.firebaseio.com/v0/jobstories.json";
+      try {
+        const response = await fetch(url);
+        if (response.ok === false) {
+          throw new Error("Response Error:" + response.text);
+        }
+        const json = await response.json();
+        const promises = json
+          .slice(0, 20)
+          .map(id =>
+            fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json`).then(
+              response => response.json()
+            )
+          );
+        const result = await Promise.all(promises);
+        setPosts(result);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    const getAsks = async() => {
+      const url = "https://hacker-news.firebaseio.com/v0/askstories.json";
+      try {
+        const response = await fetch(url);
+        if (response.ok === false) {
+          throw new Error("Response Error:" + response.text);
+        }
+        const json = await response.json();
+        const promises = json
+          .slice(0, 20)
+          .map(id =>
+            fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json`).then(
+              response => response.json()
+            )
+          );
+        const result = await Promise.all(promises);
+        setPosts(result);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+  useEffect( () => {getNew()}, [])
 
 
 return(
@@ -24,25 +84,14 @@ return(
       </h1>
       <nav>
           <ul>
-              <li onClick={fetchDataNews}>New</li>
-              <li onClick={fetchDataPast}>Pasts</li>
+              <li onClick={getNew}>New</li>
+              <li onClick={getJobs}>Jobs</li>
+              <li onClick={getAsks}>Ask</li>
               <li>Comments</li>
-              <li>Ask</li>
               <li>Show</li>
-              <li>Jobs</li>
           </ul>
       </nav>
-      <div className="posts">
-      {posts &&
-        posts.map((post, index) => {
-
-          return (
-            <div className="post" key={index}>
-              <h3>Post {index + 1}</h3>
-            </div>
-          );
-        })}
-    </div>
+      <Main posts={posts}/>
   </header>
 )
 }
